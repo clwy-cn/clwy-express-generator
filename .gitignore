@@ -1,0 +1,12 @@
+# Ignore Node.js files.
+node_modules/
+npm-debug.log
+package-lock.json
+
+# Ignore editor files.
+/.idea
+/.vscode
+
+# Ignore system files.
+.DS_Store
+Thumbs.db

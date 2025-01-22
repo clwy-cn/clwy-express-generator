@@ -1,0 +1,44 @@
+var express = require('express');
+var path = require('path');
+<% Object.keys(modules).sort().forEach(function (variable) { -%>
+var <%- variable %> = require('<%- modules[variable] %>');
+<% }); -%>
+
+<% if (view) { -%>
+var createError = require('http-errors');
+var errorHandler = require('./middlewares/error-handler');
+<% } -%>
+
+// environment variables
+require('dotenv').config();
+var routes = require('./config/routes');
+
+var app = express();
+
+<% if (view) { -%>
+// view engine setup
+<% if (view.render) { -%>
+app.engine('<%- view.engine %>', <%- view.render %>);
+<% } -%>
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', '<%- view.engine %>');
+
+<% } -%>
+<% uses.forEach(function (use) { -%>
+app.use(<%- use %>);
+<% }); -%>
+
+// routes
+app.use(routes);
+
+<% if (view) { -%>
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
+});
+
+// error handler
+app.use(errorHandler);
+
+<% } -%>
+module.exports = app;

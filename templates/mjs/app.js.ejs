@@ -1,0 +1,48 @@
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+import express from 'express';
+<% Object.keys(modules).sort().forEach(function (variable) { -%>
+import <%- variable %> from '<%- modules[variable] %>';
+<% }); -%>
+
+<% if (view) { -%>
+import createError from 'http-errors';
+import errorHandler from './middlewares/error-handler.js';
+<% } -%>
+
+// environment variables
+import 'dotenv/config';
+import routes from './config/routes.js';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const app = express();
+
+<% if (view) { -%>
+// view engine setup
+<% if (view.render) { -%>
+app.engine('<%- view.engine %>', <%- view.render %>);
+<% } -%>
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', '<%- view.engine %>');
+
+<% } -%>
+<% uses.forEach(function (use) { -%>
+app.use(<%- use %>);
+<% }); -%>
+
+// routes
+app.use(routes);
+
+<% if (view) { -%>
+// catch 404 and forward to error handler
+app.use((req, res, next) => {
+  next(createError(404));
+});
+
+// error handler
+app.use(errorHandler);
+
+<% } -%>
+export default app;
