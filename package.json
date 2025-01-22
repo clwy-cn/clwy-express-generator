@@ -2,7 +2,7 @@
   "name": "clwy-express-generator",
   "description": "Express' application generator",
   "homepage": "https://github.com/clwy-cn/clwy-express-generator",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "author": "TJ Holowaychuk <tj@vision-media.ca>",
   "contributors": [
     "Aaron Heckmann <aaron.heckmann+github@gmail.com>",
