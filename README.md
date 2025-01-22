@@ -11,11 +11,11 @@ Forked from [express-generator](https://github.com/expressjs/generator), this pr
 
 ## Features
 
-- **🚀Support for ES6 syntax**: The project now supports using ES6 syntax, making the code more modern and concise.
-- **💾Support for creating Prisma ORM project**: The project now supports integrating Prisma ORM, simplifying database operations.
-- **🔀Split routes**: The route files are now split into separate files, making them easier to manage and maintain.
-- **📁Added middleware folder**: A new middleware folder has been added to store various middleware, improving the modularity of the code.
-- **🔧Added environment variable configuration file**: The project now includes a configuration file for environment variables, making it easier to manage different environments.
+- **🚀 Support for ES6 syntax**: The project now supports using ES6 syntax, making the code more modern and concise.
+- **💾 Support for creating Prisma ORM project**: The project now supports integrating Prisma ORM, simplifying database operations.
+- **🔀 Split routes**: The route files are now split into separate files, making them easier to manage and maintain.
+- **📁 Added middleware folder**: A new middleware folder has been added to store various middleware, improving the modularity of the code.
+- **🔧 Added environment variable configuration file**: The project now includes a configuration file for environment variables, making it easier to manage different environments.
 
 ## Quick Start
 
@@ -59,11 +59,11 @@ Forked from [express-generator](https://github.com/expressjs/generator)，此项
 
 ## 功能特性
 
-- **🚀支持ES6语法**：项目现在支持使用ES6语法，使代码更加现代化和简洁。
-- **💾支持创建 Prisma ORM 项目**：项目现在支持集成 Prisma ORM，简化了数据库操作。
-- **🔀分割路由**：路由文件现在被拆分到单独的文件中，使它们更易于管理和维护。
-- **📁新增中间件文件夹**：添加了一个新的中间件文件夹来存放各种中间件，提高了代码的模块化。
-- **🔧添加环境变量配置文件**：项目现在包含一个环境变量的配置文件，使管理不同环境变得更加容易。
+- **🚀 支持ES6语法**：项目现在支持使用ES6语法，使代码更加现代化和简洁。
+- **💾 支持创建 Prisma ORM 项目**：项目现在支持集成 Prisma ORM，简化了数据库操作。
+- **🔀 分割路由**：路由文件现在被拆分到单独的文件中，使它们更易于管理和维护。
+- **📁 新增中间件文件夹**：添加了一个新的中间件文件夹来存放各种中间件，提高了代码的模块化。
+- **🔧 添加环境变量配置文件**：项目现在包含一个环境变量的配置文件，使管理不同环境变得更加容易。
 
 ## 快速开始
 
