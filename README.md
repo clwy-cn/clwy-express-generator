@@ -16,7 +16,7 @@ Forked from [express-generator](https://github.com/expressjs/generator), this pr
 - **🔀 Split routes**: The route files are now split into separate files, making them easier to manage and maintain.
 - **📁 Added middleware folder**: A new middleware folder has been added to store various middleware, improving the modularity of the code.
 - **🔧 Added environment variable configuration file**: The project now includes a configuration file for environment variables, making it easier to manage different environments.
-- **🔄 Nodemon has been added**: The project now uses nodemon by default, automatically restarting the server during development when file changes are detected.
+- **🔄 nodemon has been added**: The project now uses nodemon by default, automatically restarting the server during development when file changes are detected.
 
 ## Quick Start
 
