@@ -16,6 +16,7 @@ Forked from [express-generator](https://github.com/expressjs/generator), this pr
 - **🔀 Split routes**: The route files are now split into separate files, making them easier to manage and maintain.
 - **📁 Added middleware folder**: A new middleware folder has been added to store various middleware, improving the modularity of the code.
 - **🔧 Added environment variable configuration file**: The project now includes a configuration file for environment variables, making it easier to manage different environments.
+- **🔄 Nodemon has been added**: The project now uses nodemon by default, automatically restarting the server during development when file changes are detected.
 
 ## Quick Start
 
@@ -64,6 +65,7 @@ Forked from [express-generator](https://github.com/expressjs/generator)，此项
 - **🔀 分割路由**：路由文件现在被拆分到单独的文件中，使它们更易于管理和维护。
 - **📁 新增中间件文件夹**：添加了一个新的中间件文件夹来存放各种中间件，提高了代码的模块化。
 - **🔧 添加环境变量配置文件**：项目现在包含一个环境变量的配置文件，使管理不同环境变得更加容易。
+- **🔄 增加了 nodemon**: 项目现在默认使用 nodemon，在开发过程中，当文件发生变化时会自动重启服务。
 
 ## 快速开始
 
