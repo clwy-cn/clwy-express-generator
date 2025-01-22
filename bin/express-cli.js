@@ -199,7 +199,6 @@ function createApplication (name, dir, options, done) {
     pkg.dependencies['http-errors'] = '~1.7.2'
     copyTemplateMulti('middlewares', dir + '/middlewares', '*.js')
 
-    console.log(1111, options.view)
     switch (options.view) {
       case 'dust':
         copyTemplateMulti('views', dir + '/views', '*.dust')
