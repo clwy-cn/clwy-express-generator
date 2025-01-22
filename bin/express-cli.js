@@ -197,7 +197,10 @@ function createApplication (name, dir, options, done) {
     // Copy view templates
     mkdir(dir, 'views')
     pkg.dependencies['http-errors'] = '~1.7.2'
-    copyTemplateMulti('middlewares', dir + '/middlewares', '*.js')
+    copyTemplateMulti(
+      options.es6 ? 'mjs/middlewares' : 'js/middlewares',
+      dir + '/middlewares', '*.js'
+    )
 
     switch (options.view) {
       case 'dust':
