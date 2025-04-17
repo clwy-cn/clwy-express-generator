@@ -100,9 +100,9 @@ function createApplication (name, dir, options, done) {
       start: 'nodemon ./bin/www'
     },
     dependencies: {
-      debug: '~2.6.9',
-      dotenv: '^16.4.7',
-      express: '~4.17.1'
+      debug: '~4.4.0',
+      dotenv: '^16.5.0',
+      express: '~5.1.0'
     },
     devDependencies: {
       nodemon: '^3.1.9'
@@ -136,7 +136,7 @@ function createApplication (name, dir, options, done) {
   // Cookie parser
   app.locals.modules.cookieParser = 'cookie-parser'
   app.locals.uses.push('cookieParser()')
-  pkg.dependencies['cookie-parser'] = '~1.4.5'
+  pkg.dependencies['cookie-parser'] = '~1.4.7'
 
   // Env vars
   env.locals.orm = options.orm
@@ -151,15 +151,6 @@ function createApplication (name, dir, options, done) {
   mkdir(dir, 'public/stylesheets')
   mkdir(dir, 'middlewares')
   mkdir(dir, 'utils')
-
-  // copy Prisma templates
-  if (options.orm) {
-    pkg.dependencies.prisma = '^6.2.1'
-    pkg.dependencies['@prisma/client'] = '^6.2.1'
-
-    mkdir(dir, 'prisma')
-    copyTemplateMulti('prisma', dir + '/prisma', '*.prisma')
-  }
 
   // copy css templates
   switch (options.css) {
@@ -196,7 +187,7 @@ function createApplication (name, dir, options, done) {
   if (options.view) {
     // Copy view templates
     mkdir(dir, 'views')
-    pkg.dependencies['http-errors'] = '~1.7.2'
+    pkg.dependencies['http-errors'] = '~2.0.0'
     copyTemplateMulti(
       options.es6 ? 'mjs/middlewares' : 'js/middlewares',
       dir + '/middlewares', '*.js'
@@ -214,9 +205,6 @@ function createApplication (name, dir, options, done) {
         break
       case 'hjs':
         copyTemplateMulti('views', dir + '/views', '*.hjs')
-        break
-      case 'jade':
-        copyTemplateMulti('views', dir + '/views', '*.jade')
         break
       case 'pug':
         copyTemplateMulti('views', dir + '/views', '*.pug')
@@ -238,22 +226,22 @@ function createApplication (name, dir, options, done) {
     case 'compass':
       app.locals.modules.compass = 'node-compass'
       app.locals.uses.push("compass({ mode: 'expanded' })")
-      pkg.dependencies['node-compass'] = '0.2.3'
+      pkg.dependencies['node-compass'] = '~0.2.4'
       break
     case 'less':
       app.locals.modules.lessMiddleware = 'less-middleware'
       app.locals.uses.push("lessMiddleware(path.join(__dirname, 'public'))")
-      pkg.dependencies['less-middleware'] = '~2.2.1'
+      pkg.dependencies['less-middleware'] = '~3.1.0'
       break
     case 'sass':
       app.locals.modules.sassMiddleware = 'node-sass-middleware'
       app.locals.uses.push("sassMiddleware({\n  src: path.join(__dirname, 'public'),\n  dest: path.join(__dirname, 'public'),\n  indentedSyntax: true, // true = .sass and false = .scss\n  sourceMap: true\n})")
-      pkg.dependencies['node-sass-middleware'] = '0.11.0'
+      pkg.dependencies['node-sass-middleware'] = '~1.1.0'
       break
     case 'stylus':
       app.locals.modules.stylus = 'stylus'
       app.locals.uses.push("stylus.middleware(path.join(__dirname, 'public'))")
-      pkg.dependencies.stylus = '0.54.5'
+      pkg.dependencies.stylus = '~0.64.0'
       break
   }
 
@@ -269,31 +257,27 @@ function createApplication (name, dir, options, done) {
       break
     case 'ejs':
       app.locals.view = { engine: 'ejs' }
-      pkg.dependencies.ejs = '~2.6.1'
+      pkg.dependencies.ejs = '~3.1.10'
       break
     case 'hbs':
       app.locals.view = { engine: 'hbs' }
-      pkg.dependencies.hbs = '~4.0.4'
+      pkg.dependencies.hbs = '~4.2.0'
       break
     case 'hjs':
       app.locals.view = { engine: 'hjs' }
       pkg.dependencies.hjs = '~0.0.6'
       break
-    case 'jade':
-      app.locals.view = { engine: 'jade' }
-      pkg.dependencies.jade = '~1.11.0'
-      break
     case 'pug':
       app.locals.view = { engine: 'pug' }
-      pkg.dependencies.pug = '2.0.0-beta11'
+      pkg.dependencies.pug = '~3.0.3'
       break
     case 'twig':
       app.locals.view = { engine: 'twig' }
-      pkg.dependencies.twig = '~0.10.3'
+      pkg.dependencies.twig = '~1.17.1'
       break
     case 'vash':
       app.locals.view = { engine: 'vash' }
-      pkg.dependencies.vash = '~0.12.6'
+      pkg.dependencies.vash = '~0.13.0'
       break
     default:
       app.locals.view = false
@@ -551,12 +535,11 @@ function usage () {
   console.log('        --pug            add pug engine support')
   console.log('        --hbs            add handlebars engine support')
   console.log('    -H, --hogan          add hogan.js engine support')
-  console.log('    -v, --view <engine>  add view <engine> support (dust|ejs|hbs|hjs|jade|pug|twig|vash) (defaults to ejs)')
+  console.log('    -v, --view <engine>  add view <engine> support (dust|ejs|hbs|hjs|pug|twig|vash) (defaults to ejs)')
   console.log('        --no-view        use static html instead of view engine')
   console.log('    -c, --css <engine>   add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)')
   console.log('        --git            add .gitignore')
   console.log('        --es6            generate ES6 code and module-type project (requires Node 14.x or higher)')
-  console.log('    -o, --orm            specify the ORM to use Prisma')
   console.log('    -f, --force          force on non-empty directory')
   console.log('    --version            output the version number')
   console.log('    -h, --help           output usage information')

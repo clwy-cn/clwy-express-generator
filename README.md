@@ -12,7 +12,6 @@ Forked from [express-generator](https://github.com/expressjs/generator), this pr
 ## Features
 
 - **🚀 Support for ES6 syntax**: The project now supports using ES6 syntax, making the code more modern and concise.
-- **💾 Support for creating Prisma ORM project**: The project now supports integrating Prisma ORM, simplifying database operations.
 - **🔀 Split routes**: The route files are now split into separate files, making them easier to manage and maintain.
 - **📁 Added middleware folder**: A new middleware folder has been added to store various middleware, improving the modularity of the code.
 - **🔧 Added environment variable configuration file**: The project now includes a configuration file for environment variables, making it easier to manage different environments.
@@ -45,7 +44,7 @@ $ npm start
 This generator can also be further configured with the following command line flags.
 
         --version        output the version number
-    -v, --view <engine>  add view <engine> support (dust|ejs|hbs|hjs|jade|pug|twig|vash|api) (defaults to ejs)
+    -v, --view <engine>  add view <engine> support (dust|ejs|hbs|hjs|pug|twig|vash|api) (defaults to ejs)
         --no-view        use static html instead of view engine
     -c, --css <engine>   add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)
         --git            add .gitignore
@@ -61,7 +60,6 @@ Forked from [express-generator](https://github.com/expressjs/generator)，此项
 ## 功能特性
 
 - **🚀 支持ES6语法**：项目现在支持使用ES6语法，使代码更加现代化和简洁。
-- **💾 支持创建 Prisma ORM 项目**：项目现在支持集成 Prisma ORM，简化了数据库操作。
 - **🔀 分割路由**：路由文件现在被拆分到单独的文件中，使它们更易于管理和维护。
 - **📁 新增中间件文件夹**：添加了一个新的中间件文件夹来存放各种中间件，提高了代码的模块化。
 - **🔧 添加环境变量配置文件**：项目现在包含一个环境变量的配置文件，使管理不同环境变得更加容易。
@@ -74,7 +72,7 @@ Forked from [express-generator](https://github.com/expressjs/generator)，此项
 创建应用：
 
 ```bash
-$ npx clwy-express-generator --view=ejs --orm --es6 demo && cd demo
+$ npx clwy-express-generator --view=ejs --es6 demo && cd demo
 ```
 
 安装依赖：
@@ -94,7 +92,7 @@ $ npm start
 此生成器还可以通过以下命令行标志进行进一步配置。
 
         --version        输出版本号
-    -v, --view <engine>  添加视图引擎 <engine> 支持 (dust|ejs|hbs|hjs|jade|pug|twig|vash|api)（默认为 ejs）
+    -v, --view <engine>  添加视图引擎 <engine> 支持 (dust|ejs|hbs|hjs|pug|twig|vash|api)（默认为 ejs）
         --no-view        使用静态html而不是视图引擎
     -c, --css <engine>   添加样式表引擎 <engine> 支持 (less|stylus|compass|sass)（默认为纯 css）
         --git            添加 .gitignore 文件
