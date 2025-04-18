@@ -24,7 +24,7 @@ The quickest way to get started with express is to utilize the executable `expre
 Create the app:
 
 ```bash
-$ npx clwy-express-generator --view=ejs --orm --es6 demo && cd demo
+$ npx clwy-express-generator --view=ejs --es6 es6-demo && cd es6-demo
 ```
 
 Install dependencies:
@@ -72,7 +72,7 @@ Forked from [express-generator](https://github.com/expressjs/generator)，此项
 创建应用：
 
 ```bash
-$ npx clwy-express-generator --view=ejs --es6 demo && cd demo
+$ npx clwy-express-generator --view=ejs --es6 es6-demo && cd es6-demo
 ```
 
 安装依赖：
