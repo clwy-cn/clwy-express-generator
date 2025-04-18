@@ -1,13 +1,8 @@
 [![Express Logo](https://i.cloudup.com/zfY6lL7eFa-3000x3000.png)](http://expressjs.com/)
 
-[Express'](https://www.npmjs.com/package/express) application generator.
+[Express](https://www.npmjs.com/package/express) 应用程序生成器。
 
-[![NPM Version][npm-image]][npm-url]
-[![NPM Downloads][downloads-image]][downloads-url]
-[![Linux Build][github-actions-ci-image]][github-actions-ci-url]
-[![Windows Build][appveyor-image]][appveyor-url]
-
-Forked from [express-generator](https://github.com/expressjs/generator)，此项目是从这个项目派生而来，并添加了一些新特性。
+此项目是从[express-generator](https://github.com/expressjs/generator)分叉而来，并添加了一些新特性。
 
 ## 功能特性
 
@@ -55,9 +50,11 @@ $ npm start
     -f, --force          强制在非空目录上操作
     -h, --help           输出使用信息
 
-Forked from [express-generator](https://github.com/expressjs/generator), this project is a fork with some new features.
-
 ------------
+
+[Express'](https://www.npmjs.com/package/express) application generator.
+
+Forked from [express-generator](https://github.com/expressjs/generator), this project is a fork with some new features.
 
 ## Features
 
@@ -110,12 +107,3 @@ This generator can also be further configured with the following command line fl
 ## License
 
 [MIT](LICENSE)
-
-[npm-image]: https://img.shields.io/npm/v/express-generator.svg
-[npm-url]: https://npmjs.org/package/express-generator
-[appveyor-image]: https://img.shields.io/appveyor/ci/dougwilson/generator/master.svg?label=windows
-[appveyor-url]: https://ci.appveyor.com/project/dougwilson/generator
-[downloads-image]: https://img.shields.io/npm/dm/express-generator.svg
-[downloads-url]: https://npmjs.org/package/express-generator
-[github-actions-ci-image]: https://img.shields.io/github/workflow/status/expressjs/generator/ci/master?label=linux
-[github-actions-ci-url]: https://github.com/expressjs/generator/actions/workflows/ci.yml
