@@ -7,15 +7,67 @@
 [![Linux Build][github-actions-ci-image]][github-actions-ci-url]
 [![Windows Build][appveyor-image]][appveyor-url]
 
+Forked from [express-generator](https://github.com/expressjs/generator)，此项目是从这个项目派生而来，并添加了一些新特性。
+
+## 功能特性
+
+- **🚀 ES6支持**：代码更现代简洁。
+- **🔀 路由拆分**：独立文件，便于管理维护。
+- **📁 中间件模块化**：新增文件夹存放中间件。
+- **🔧 增加环境变量配置**：多环境管理更便捷。
+- **🔄 集成nodemon**：开发时自动重启服务。
+- **📄 新增 README.md**：包含项目简介和基本功能说明。
+- **📦 内置配置**：默认包含`.prettierrc`（代码格式化）和`.gitignore`（文件忽略）。
+
+## 快速开始
+
+使用express最快的方式是利用可执行文件`express(1)`来生成一个应用，如下所示：
+
+创建应用：
+
+```bash
+$ npx clwy-express-generator --view=ejs --es6 es6-demo && cd es6-demo
+```
+
+安装依赖：
+
+```bash
+$ npm install
+```
+
+在 `http://localhost:3000/` 启动您的 Express.js 应用：
+
+```bash
+$ npm start
+```
+
+## 命令行选项
+
+此生成器还可以通过以下命令行标志进行进一步配置。
+
+        --version        输出版本号
+    -v, --view <engine>  添加视图引擎 <engine> 支持 (dust|ejs|hbs|hjs|pug|twig|vash|api)（默认为 ejs）
+        --no-view        使用静态html而不是视图引擎
+    -c, --css <engine>   添加样式表引擎 <engine> 支持 (less|stylus|compass|sass)（默认为纯 css）
+        --git            添加 .gitignore 文件
+        --es6            生成 ES6 代码和模块类型项目（需要Node 14.x或更高版本）
+    -o, --orm            使用 Prisma ORM
+    -f, --force          强制在非空目录上操作
+    -h, --help           输出使用信息
+
 Forked from [express-generator](https://github.com/expressjs/generator), this project is a fork with some new features.
+
+------------
 
 ## Features
 
-- **🚀 Support for ES6 syntax**: The project now supports using ES6 syntax, making the code more modern and concise.
-- **🔀 Split routes**: The route files are now split into separate files, making them easier to manage and maintain.
-- **📁 Added middleware folder**: A new middleware folder has been added to store various middleware, improving the modularity of the code.
-- **🔧 Added environment variable configuration file**: The project now includes a configuration file for environment variables, making it easier to manage different environments.
-- **🔄 nodemon has been added**: The project now uses nodemon by default, automatically restarting the server during development when file changes are detected.
+- **🚀 ES6 Support**: Modern and cleaner code.
+- **🔀 Split Routes**: Separate files for easier management and maintenance.
+- **📁 Modular Middleware**: Dedicated folder for middleware.
+- **🔧 Environment Variables**: Easier multi-environment configuration.
+- **🔄 Nodemon Integration**: Auto-restart during development.
+- **📄 Added basic README.md**: Describes the project as a simple Express app with static file serving and basic routing.
+- **📦 Built-in Configs**: Includes `.prettierrc` (code formatting) and `.gitignore` (file exclusion) by default.
 
 ## Quick Start
 
@@ -54,52 +106,6 @@ This generator can also be further configured with the following command line fl
     -h, --help           output usage information
 
 ------------
-
-Forked from [express-generator](https://github.com/expressjs/generator)，此项目是从这个项目派生而来，并添加了一些新特性。
-
-## 功能特性
-
-- **🚀 支持ES6语法**：项目现在支持使用ES6语法，使代码更加现代化和简洁。
-- **🔀 分割路由**：路由文件现在被拆分到单独的文件中，使它们更易于管理和维护。
-- **📁 新增中间件文件夹**：添加了一个新的中间件文件夹来存放各种中间件，提高了代码的模块化。
-- **🔧 添加环境变量配置文件**：项目现在包含一个环境变量的配置文件，使管理不同环境变得更加容易。
-- **🔄 增加了 nodemon**: 项目现在默认使用 nodemon，在开发过程中，当文件发生变化时会自动重启服务。
-
-## 快速开始
-
-使用express最快的方式是利用可执行文件`express(1)`来生成一个应用，如下所示：
-
-创建应用：
-
-```bash
-$ npx clwy-express-generator --view=ejs --es6 es6-demo && cd es6-demo
-```
-
-安装依赖：
-
-```bash
-$ npm install
-```
-
-在 `http://localhost:3000/` 启动您的 Express.js 应用：
-
-```bash
-$ npm start
-```
-
-## 命令行选项
-
-此生成器还可以通过以下命令行标志进行进一步配置。
-
-        --version        输出版本号
-    -v, --view <engine>  添加视图引擎 <engine> 支持 (dust|ejs|hbs|hjs|pug|twig|vash|api)（默认为 ejs）
-        --no-view        使用静态html而不是视图引擎
-    -c, --css <engine>   添加样式表引擎 <engine> 支持 (less|stylus|compass|sass)（默认为纯 css）
-        --git            添加 .gitignore 文件
-        --es6            生成 ES6 代码和模块类型项目（需要Node 14.x或更高版本）
-    -o, --orm            使用 Prisma ORM
-    -f, --force          强制在非空目录上操作
-    -h, --help           输出使用信息
 
 ## License
 

@@ -1,24 +1,24 @@
 #!/usr/bin/env node
 
-var ejs = require('ejs')
-var fs = require('fs')
-var minimatch = require('minimatch')
-var mkdirp = require('mkdirp')
-var parseArgs = require('minimist')
-var path = require('path')
-var readline = require('readline')
-var sortedObject = require('sorted-object')
-var util = require('util')
+const ejs = require('ejs')
+const fs = require('fs')
+const minimatch = require('minimatch')
+const mkdirp = require('mkdirp')
+const parseArgs = require('minimist')
+const path = require('path')
+const readline = require('readline')
+const sortedObject = require('sorted-object')
+const util = require('util')
 
-var MODE_0666 = parseInt('0666', 8)
-var MODE_0755 = parseInt('0755', 8)
-var TEMPLATE_DIR = path.join(__dirname, '..', 'templates')
-var VERSION = require('../package').version
-var MIN_ES6_VERSION = 14
+const MODE_0666 = parseInt('0666', 8)
+const MODE_0755 = parseInt('0755', 8)
+const TEMPLATE_DIR = path.join(__dirname, '..', 'templates')
+const VERSION = require('../package').version
+const MIN_ES6_VERSION = 14
 
 // parse args
-var unknown = []
-var args = parseArgs(process.argv.slice(2), {
+const unknown = []
+const args = parseArgs(process.argv.slice(2), {
   alias: {
     c: 'css',
     e: 'ejs',
@@ -48,7 +48,7 @@ main(args, exit)
  */
 
 function confirm (msg, callback) {
-  var rl = readline.createInterface({
+  const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
   })
@@ -92,12 +92,13 @@ function createApplication (name, dir, options, done) {
   console.log()
 
   // Package
-  var pkg = {
+  const pkg = {
     name: name,
     version: '0.0.0',
     private: true,
     scripts: {
-      start: 'nodemon ./bin/www'
+      start: 'nodemon ./bin/www',
+      format: 'prettier --write "**/*.{js,json,md}"'
     },
     dependencies: {
       debug: '~4.4.0',
@@ -105,7 +106,8 @@ function createApplication (name, dir, options, done) {
       express: '~5.1.0'
     },
     devDependencies: {
-      nodemon: '^3.1.9'
+      nodemon: '^3.1.9',
+      prettier: '^3.5.3'
     }
   }
   if (options.es6) {
@@ -113,9 +115,9 @@ function createApplication (name, dir, options, done) {
   }
 
   // JavaScript
-  var app = loadTemplate(options.es6 ? 'mjs/app.js' : 'js/app.js')
-  var www = loadTemplate(options.es6 ? 'mjs/www' : 'js/www')
-  var env = loadTemplate('.env')
+  const app = loadTemplate(options.es6 ? 'mjs/app.js' : 'js/app.js')
+  const www = loadTemplate(options.es6 ? 'mjs/www' : 'js/www')
+  const env = loadTemplate('env')
 
   // App name
   www.locals.name = name
@@ -138,7 +140,7 @@ function createApplication (name, dir, options, done) {
   app.locals.uses.push('cookieParser()')
   pkg.dependencies['cookie-parser'] = '~1.4.7'
 
-  // Env vars
+  // Env consts
   env.locals.orm = options.orm
 
   if (dir !== '.') {
@@ -170,6 +172,9 @@ function createApplication (name, dir, options, done) {
       copyTemplateMulti('css', dir + '/public/stylesheets', '*.css')
       break
   }
+
+  // copy Prettier templates
+  copyTemplate(options.es6 ? 'mjs/prettierrc.json' : 'js/prettierrc.json', path.join(dir, '.prettierrc.json'))
 
   // copy config templates
   mkdir(dir, 'config')
@@ -287,9 +292,11 @@ function createApplication (name, dir, options, done) {
   // Static files
   app.locals.uses.push("express.static(path.join(__dirname, 'public'))")
 
-  if (options.git) {
-    copyTemplate('js/gitignore', path.join(dir, '.gitignore'))
-  }
+  // Git ignore file
+  copyTemplate('gitignore', path.join(dir, '.gitignore'))
+
+  // Git README file
+  copyTemplate('README.md', path.join(dir, 'README.md'))
 
   // sort dependencies like npm(1)
   pkg.dependencies = sortedObject(pkg.dependencies)
@@ -301,7 +308,7 @@ function createApplication (name, dir, options, done) {
   write(path.join(dir, 'bin/www'), www.render(), MODE_0755)
   write(path.join(dir, '.env'), env.render())
 
-  var prompt = launchedFromCmd() ? '>' : '$'
+  const prompt = launchedFromCmd() ? '>' : '$'
 
   if (dir !== '.') {
     console.log()
@@ -379,8 +386,8 @@ function exit (code) {
     if (!(draining--)) process.exit(code)
   }
 
-  var draining = 0
-  var streams = [process.stdout, process.stderr]
+  let draining = 0
+  const streams = [process.stdout, process.stderr]
 
   exit.exited = true
 
@@ -407,8 +414,8 @@ function launchedFromCmd () {
  */
 
 function loadTemplate (name) {
-  var contents = fs.readFileSync(path.join(__dirname, '..', 'templates', (name + '.ejs')), 'utf-8')
-  var locals = Object.create(null)
+  const contents = fs.readFileSync(path.join(__dirname, '..', 'templates', (name + '.ejs')), 'utf-8')
+  const locals = Object.create(null)
 
   function render () {
     return ejs.render(contents, locals, {
@@ -453,10 +460,10 @@ function main (options, done) {
   } else {
     console.log(options.view)
     // Path
-    var destinationPath = options._[0] || '.'
+    const destinationPath = options._[0] || '.'
 
     // App name
-    var appName = createAppName(path.resolve(destinationPath)) || 'hello-world'
+    const appName = createAppName(path.resolve(destinationPath)) || 'hello-world'
 
     // View engine
     if (options.view === true) {
@@ -515,7 +522,7 @@ function main (options, done) {
  */
 
 function mkdir (base, dir) {
-  var loc = path.join(base, dir)
+  const loc = path.join(base, dir)
 
   console.log('   \x1b[36mcreate\x1b[0m : ' + loc + path.sep)
   mkdirp.sync(loc, MODE_0755)
