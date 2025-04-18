@@ -1,8 +1,10 @@
 [![Express Logo](https://i.cloudup.com/zfY6lL7eFa-3000x3000.png)](http://expressjs.com/)
 
-[Express](https://www.npmjs.com/package/express) 应用程序生成器。
+# [Express](https://www.npmjs.com/package/express) 应用程序生成器。
 
-此项目是从[express-generator](https://github.com/expressjs/generator)分叉而来，并添加了一些新特性。
+**此项目基于 [express-generator](https://github.com/expressjs/generator) 分叉而来，并新增了一些功能特性。**
+
+**其中，ES6 支持的实现参考了 [Dr. Jeff Jackson](https://github.com/drjeffjackson) 提交的 [Pull Request](https://github.com/expressjs/generator/pull/316)，并在其基础上进行了进一步优化和调整。**
 
 ## 功能特性
 
@@ -52,9 +54,11 @@ $ npm start
 
 ------------
 
-[Express'](https://www.npmjs.com/package/express) application generator.
+# [Express'](https://www.npmjs.com/package/express) application generator.
 
-Forked from [express-generator](https://github.com/expressjs/generator), this project is a fork with some new features.
+**This project is a fork of [express-generator](https://github.com/expressjs/generator), enhanced with new features.**
+
+**The ES6 support was adapted and improved from [Dr Jeff Jackson](https://github.com/drjeffjackson)'s [Pull Request](https://github.com/expressjs/generator/pull/316).**
 
 ## Features
 
