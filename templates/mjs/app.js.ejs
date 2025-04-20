@@ -1,22 +1,18 @@
+import express from 'express'
 import path from 'path'
 import { fileURLToPath } from 'url'
-
-import express from 'express'
 <% Object.keys(modules).sort().forEach(function (variable) { -%>
 import <%- variable %> from '<%- modules[variable] %>'
 <% }) -%>
-
+import 'dotenv/config'
 <% if (view) { -%>
 import createError from 'http-errors'
 import errorHandler from './middlewares/error-handler.js'
 <% } -%>
-
-// environment variables
-import 'dotenv/config'
 import routes from './config/routes.js'
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const app = express()
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 <% if (view) { -%>
 // view engine setup

@@ -3,14 +3,11 @@ var path = require('path');
 <% Object.keys(modules).sort().forEach(function (variable) { -%>
 var <%- variable %> = require('<%- modules[variable] %>');
 <% }); -%>
-
+require('dotenv').config();
 <% if (view) { -%>
 var createError = require('http-errors');
 var errorHandler = require('./middlewares/error-handler');
 <% } -%>
-
-// environment variables
-require('dotenv').config();
 var routes = require('./config/routes');
 
 var app = express();
