@@ -13,6 +13,7 @@
 - **📁 中间件模块化**：新增文件夹存放中间件。
 - **🔧 增加环境变量配置**：多环境管理更便捷。
 - **🔄 集成nodemon**：开发时自动重启服务。
+- **🌐 集成CORS**：允许跨域请求。
 - **📄 新增 README.md**：包含项目简介和基本功能说明。
 - **📦 内置配置**：默认包含`.prettierrc`（代码格式化）和`.gitignore`（文件忽略）。
 
@@ -67,6 +68,7 @@ $ npm start
 - **📁 Modular Middleware**: Dedicated folder for middleware.
 - **🔧 Environment Variables**: Easier multi-environment configuration.
 - **🔄 Nodemon Integration**: Auto-restart during development.
+- **🌐 CORS Integration**: Allows cross-origin requests.
 - **📄 Added basic README.md**: Describes the project as a simple Express app with static file serving and basic routing.
 - **📦 Built-in Configs**: Includes `.prettierrc` (code formatting) and `.gitignore` (file exclusion) by default.
 
