@@ -25,10 +25,9 @@ const args = parseArgs(process.argv.slice(2), {
     f: 'force',
     h: 'help',
     H: 'hogan',
-    v: 'view',
-    o: 'orm'
+    v: 'view'
   },
-  boolean: ['ejs', 'es6', 'force', 'git', 'hbs', 'help', 'hogan', 'pug', 'version', 'orm'],
+  boolean: ['ejs', 'es6', 'force', 'git', 'hbs', 'help', 'hogan', 'pug', 'version'],
   default: { css: true, view: true },
   string: ['css', 'view'],
   unknown: function (s) {
@@ -141,8 +140,9 @@ function createApplication (name, dir, options, done) {
   app.locals.uses.push('cookieParser()')
   pkg.dependencies['cookie-parser'] = '~1.4.7'
 
-  // Env consts
-  env.locals.orm = options.orm
+  // CORS
+  app.locals.modules.cors = 'cors'
+  app.locals.uses.push('cors()')
 
   if (dir !== '.') {
     mkdir(dir, '.')

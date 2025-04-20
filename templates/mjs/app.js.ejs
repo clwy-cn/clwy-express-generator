@@ -16,7 +16,6 @@ import 'dotenv/config'
 import routes from './config/routes.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-
 const app = express()
 
 <% if (view) { -%>
@@ -31,9 +30,6 @@ app.set('view engine', '<%- view.engine %>')
 <% uses.forEach(function (use) { -%>
 app.use(<%- use %>)
 <% }) -%>
-
-// CORS
-app.use(cors())
 
 // routes
 app.use(routes)
