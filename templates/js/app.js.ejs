@@ -28,6 +28,9 @@ app.set('view engine', '<%- view.engine %>');
 app.use(<%- use %>);
 <% }); -%>
 
+// CORS
+app.use(cors());
+
 // routes
 app.use(routes);
 

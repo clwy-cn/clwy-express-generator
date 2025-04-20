@@ -106,6 +106,7 @@ function createApplication (name, dir, options, done) {
       express: '~5.1.0'
     },
     devDependencies: {
+      cors: '^2.8.5',
       nodemon: '^3.1.9',
       prettier: '^3.5.3'
     }
