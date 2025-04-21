@@ -95,6 +95,7 @@ function createApplication (name, dir, options, done) {
     name: name,
     version: '0.0.0',
     private: true,
+    type: options.es6 ? 'module' : 'commonjs',
     scripts: {
       start: 'nodemon ./bin/www',
       format: 'prettier --write "**/*.{js,json,md}"'
@@ -109,9 +110,6 @@ function createApplication (name, dir, options, done) {
       nodemon: '^3.1.9',
       prettier: '^3.5.3'
     }
-  }
-  if (options.es6) {
-    pkg.type = 'module'
   }
 
   // JavaScript
