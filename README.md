@@ -49,7 +49,6 @@ $ npm start
     -c, --css <engine>   添加样式表引擎 <engine> 支持 (less|stylus|compass|sass)（默认为纯 css）
         --git            添加 .gitignore 文件
         --es6            生成 ES6 代码和模块类型项目（需要Node 14.x或更高版本）
-    -o, --orm            使用 Prisma ORM
     -f, --force          强制在非空目录上操作
     -h, --help           输出使用信息
 
@@ -104,7 +103,6 @@ This generator can also be further configured with the following command line fl
     -c, --css <engine>   add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)
         --git            add .gitignore
         --es6            generate ES6 code and module-type project (requires Node 14.x or higher)
-    -o, --orm            use the Prisma ORM
     -f, --force          force on non-empty directory
     -h, --help           output usage information
 

@@ -101,12 +101,12 @@ function createApplication (name, dir, options, done) {
       format: 'prettier --write "**/*.{js,json,md}"'
     },
     dependencies: {
+      cors: '^2.8.5',
       debug: '~4.4.0',
       dotenv: '^16.5.0',
       express: '~5.1.0'
     },
     devDependencies: {
-      cors: '^2.8.5',
       nodemon: '^3.1.9',
       prettier: '^3.5.3'
     }
