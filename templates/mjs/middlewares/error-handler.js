@@ -12,6 +12,6 @@ export default (err, req, res, next) => {
   // res.json({
   //   status: false,
   //   message: err.message
-  // });
+  // })
   res.render('error')
 }
