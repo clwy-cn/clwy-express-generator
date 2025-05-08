@@ -1,6 +1,6 @@
 [![Express Logo](https://i.cloudup.com/zfY6lL7eFa-3000x3000.png)](http://expressjs.com/)
 
-# [Express](https://www.npmjs.com/package/express) 应用程序生成器。
+# clwy-express-generator：[Express](https://www.npmjs.com/package/express) 应用程序生成器
 
 **此项目基于 [express-generator](https://github.com/expressjs/generator) 分叉而来，并新增了一些功能特性。**
 
@@ -48,13 +48,13 @@ $ npm start
         --no-view        使用静态html而不是视图引擎
     -c, --css <engine>   添加样式表引擎 <engine> 支持 (less|stylus|compass|sass)（默认为纯 css）
         --git            添加 .gitignore 文件
-        --es6            生成 ES6 代码和模块类型项目（需要Node 14.x或更高版本）
+        --es6            生成 ES6 代码和模块类型项目（需要Node 22.x或更高版本）
     -f, --force          强制在非空目录上操作
     -h, --help           输出使用信息
 
 ------------
 
-# [Express'](https://www.npmjs.com/package/express) application generator.
+# clwy-express-generator: [Express'](https://www.npmjs.com/package/express) application generator
 
 **This project is a fork of [express-generator](https://github.com/expressjs/generator), enhanced with new features.**
 
@@ -102,7 +102,7 @@ This generator can also be further configured with the following command line fl
         --no-view        use static html instead of view engine
     -c, --css <engine>   add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)
         --git            add .gitignore
-        --es6            generate ES6 code and module-type project (requires Node 14.x or higher)
+        --es6            generate ES6 code and module-type project (requires Node 22.x or higher)
     -f, --force          force on non-empty directory
     -h, --help           output usage information
 
