@@ -25,26 +25,16 @@ const args = parseArgs(process.argv.slice(2), {
     f: 'force',
     h: 'help',
     H: 'hogan',
-    v: 'view'
+    v: 'view',
   },
-  boolean: [
-    'ejs',
-    'es6',
-    'force',
-    'git',
-    'hbs',
-    'help',
-    'hogan',
-    'pug',
-    'version'
-  ],
+  boolean: ['ejs', 'es6', 'force', 'git', 'hbs', 'help', 'hogan', 'pug', 'version'],
   default: { css: true, view: true },
   string: ['css', 'view'],
   unknown: function (s) {
     if (s.charAt(0) === '-') {
       unknown.push(s)
     }
-  }
+  },
 })
 
 args['!'] = unknown
@@ -59,7 +49,7 @@ main(args, exit)
 function confirm(msg, callback) {
   const rl = readline.createInterface({
     input: process.stdin,
-    output: process.stdout
+    output: process.stdout,
   })
 
   rl.question(msg, function (input) {
@@ -108,18 +98,18 @@ function createApplication(name, dir, options, done) {
     type: options.es6 ? 'module' : 'commonjs',
     scripts: {
       start: 'nodemon ./bin/www',
-      format: 'prettier --write "**/*.{js,json,md}"'
+      format: 'prettier --write "**/*.{js,json,md}"',
     },
     dependencies: {
       cors: '^2.8.5',
       debug: '~4.4.3',
       dotenv: '^17.2.3',
-      express: '~5.2.1'
+      express: '~5.2.1',
     },
     devDependencies: {
       nodemon: '^3.1.11',
-      prettier: '^3.7.4'
-    }
+      prettier: '^3.7.4',
+    },
   }
 
   // JavaScript
@@ -185,24 +175,16 @@ function createApplication(name, dir, options, done) {
   // copy Prettier templates
   copyTemplate(
     options.es6 ? 'mjs/prettierrc.json' : 'js/prettierrc.json',
-    path.join(dir, '.prettierrc.json')
+    path.join(dir, '.prettierrc.json'),
   )
 
   // copy config templates
   mkdir(dir, 'config')
-  copyTemplateMulti(
-    options.es6 ? 'mjs/config' : 'js/config',
-    dir + '/config',
-    '*.js'
-  )
+  copyTemplateMulti(options.es6 ? 'mjs/config' : 'js/config', dir + '/config', '*.js')
 
   // copy route templates
   mkdir(dir, 'routes')
-  copyTemplateMulti(
-    options.es6 ? 'mjs/routes' : 'js/routes',
-    dir + '/routes',
-    '*.js'
-  )
+  copyTemplateMulti(options.es6 ? 'mjs/routes' : 'js/routes', dir + '/routes', '*.js')
 
   if (options.view) {
     // Copy view templates
@@ -211,7 +193,7 @@ function createApplication(name, dir, options, done) {
     copyTemplateMulti(
       options.es6 ? 'mjs/middlewares' : 'js/middlewares',
       dir + '/middlewares',
-      '*.js'
+      '*.js',
     )
 
     switch (options.view) {
@@ -257,7 +239,7 @@ function createApplication(name, dir, options, done) {
     case 'sass':
       app.locals.modules.sassMiddleware = 'node-sass-middleware'
       app.locals.uses.push(
-        "sassMiddleware({\n  src: path.join(__dirname, 'public'),\n  dest: path.join(__dirname, 'public'),\n  indentedSyntax: true, // true = .sass and false = .scss\n  sourceMap: true\n})"
+        "sassMiddleware({\n  src: path.join(__dirname, 'public'),\n  dest: path.join(__dirname, 'public'),\n  indentedSyntax: true, // true = .sass and false = .scss\n  sourceMap: true\n})",
       )
       pkg.dependencies['node-sass-middleware'] = '~1.1.0'
       break
@@ -274,7 +256,7 @@ function createApplication(name, dir, options, done) {
       app.locals.modules.adaro = 'adaro'
       app.locals.view = {
         engine: 'dust',
-        render: 'adaro.dust()'
+        render: 'adaro.dust()',
       }
       pkg.dependencies.adaro = '~1.0.4'
       break
@@ -432,21 +414,18 @@ function launchedFromCmd() {
  */
 
 function loadTemplate(name) {
-  const contents = fs.readFileSync(
-    path.join(__dirname, '..', 'templates', name + '.ejs'),
-    'utf-8'
-  )
+  const contents = fs.readFileSync(path.join(__dirname, '..', 'templates', name + '.ejs'), 'utf-8')
   const locals = Object.create(null)
 
   function render() {
     return ejs.render(contents, locals, {
-      escape: util.inspect
+      escape: util.inspect,
     })
   }
 
   return {
     locals: locals,
-    render: render
+    render: render,
   }
 }
 
@@ -474,14 +453,9 @@ function main(options, done) {
     usage()
     error("option `-v, --view <engine>' argument missing")
     done(1)
-  } else if (
-    options.es6 &&
-    process.versions.node.split('.')[0] < MIN_ES6_VERSION
-  ) {
+  } else if (options.es6 && process.versions.node.split('.')[0] < MIN_ES6_VERSION) {
     usage()
-    error(
-      "option `--es6' requires Node version " + MIN_ES6_VERSION + '.x or higher'
-    )
+    error("option `--es6' requires Node version " + MIN_ES6_VERSION + '.x or higher')
     done(1)
   } else {
     console.log(options.view)
@@ -489,8 +463,7 @@ function main(options, done) {
     const destinationPath = options._[0] || '.'
 
     // App name
-    const appName =
-      createAppName(path.resolve(destinationPath)) || 'hello-world'
+    const appName = createAppName(path.resolve(destinationPath)) || 'hello-world'
 
     // View engine
     if (options.view === true) {
@@ -519,7 +492,7 @@ function main(options, done) {
     if (options.view === true) {
       warning(
         'the default view engine will not be ejs in future releases\n' +
-          "use `--view=ejs' or `--help' for additional options"
+          "use `--view=ejs' or `--help' for additional options",
       )
       options.view = 'ejs'
     }
@@ -572,15 +545,15 @@ function usage() {
   console.log('        --hbs            add handlebars engine support')
   console.log('    -H, --hogan          add hogan.js engine support')
   console.log(
-    '    -v, --view <engine>  add view <engine> support (dust|ejs|hbs|hjs|pug|twig|vash) (defaults to ejs)'
+    '    -v, --view <engine>  add view <engine> support (dust|ejs|hbs|hjs|pug|twig|vash) (defaults to ejs)',
   )
   console.log('        --no-view        use static html instead of view engine')
   console.log(
-    '    -c, --css <engine>   add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)'
+    '    -c, --css <engine>   add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)',
   )
   console.log('        --git            add .gitignore')
   console.log(
-    '        --es6            generate ES6 code and module-type project (requires Node 14.x or higher)'
+    '        --es6            generate ES6 code and module-type project (requires Node 14.x or higher)',
   )
   console.log('    -f, --force          force on non-empty directory')
   console.log('    --version            output the version number')
