@@ -14,7 +14,7 @@ const MODE_0666 = parseInt('0666', 8)
 const MODE_0755 = parseInt('0755', 8)
 const TEMPLATE_DIR = path.join(__dirname, '..', 'templates')
 const VERSION = require('../package').version
-const MIN_ES6_VERSION = 14
+const MIN_ES6_VERSION = 22
 
 // parse args
 const unknown = []
@@ -26,9 +26,10 @@ const args = parseArgs(process.argv.slice(2), {
     h: 'help',
     H: 'hogan',
     v: 'view',
+    o: 'orm',
   },
   boolean: ['ejs', 'es6', 'force', 'git', 'hbs', 'help', 'hogan', 'pug', 'version'],
-  default: { css: true, view: true },
+  default: { css: true, view: true, orm: false },
   string: ['css', 'view'],
   unknown: function (s) {
     if (s.charAt(0) === '-') {
@@ -152,6 +153,9 @@ function createApplication(name, dir, options, done) {
   mkdir(dir, 'public/stylesheets')
   mkdir(dir, 'middlewares')
   mkdir(dir, 'utils')
+
+  // copy docker-compose.yml
+  copyTemplate('docker-compose.yml', path.join(dir, 'docker-compose.yml'))
 
   // copy css templates
   switch (options.css) {
@@ -287,6 +291,34 @@ function createApplication(name, dir, options, done) {
     default:
       app.locals.view = false
       break
+  }
+
+  // ORM
+  env.locals.orm = false
+  if (options.orm) {
+    env.locals.orm = options.orm
+
+    switch (options.orm) {
+      case 'prisma':
+        // copy Prisma templates
+        pkg.dependencies.prisma = '^7.2.0'
+        pkg.dependencies['@prisma/client'] = '^7.2.0'
+
+        mkdir(dir, 'prisma')
+        copyTemplateMulti('prisma', dir, 'prisma.config.js')
+        copyTemplateMulti('prisma/prisma', dir + '/prisma', 'schema.prisma')
+        break
+      case 'sequelize':
+        // copy Sequelize templates
+        pkg.dependencies.sequelize = '^6.37.7'
+
+        mkdir(dir, 'migrations')
+        mkdir(dir, 'seeders')
+        mkdir(dir, 'models')
+        copyTemplateMulti('sequelize/models', dir + '/models', 'index.js')
+        copyTemplateMulti('sequelize/config', dir + '/config', 'config.json')
+        break
+    }
   }
 
   // Static files
@@ -453,6 +485,10 @@ function main(options, done) {
     usage()
     error("option `-v, --view <engine>' argument missing")
     done(1)
+  } else if (options.orm === '') {
+    usage()
+    error("option `-o, --orm <engine>' argument missing")
+    done(1)
   } else if (options.es6 && process.versions.node.split('.')[0] < MIN_ES6_VERSION) {
     usage()
     error("option `--es6' requires Node version " + MIN_ES6_VERSION + '.x or higher')
@@ -491,8 +527,8 @@ function main(options, done) {
     // Default view engine
     if (options.view === true) {
       warning(
-        'the default view engine will not be ejs in future releases\n' +
-          "use `--view=ejs' or `--help' for additional options",
+        'the default view engine is ejs\n' +
+        "use `--view=ejs' or `--help' for additional options",
       )
       options.view = 'ejs'
     }
@@ -553,7 +589,10 @@ function usage() {
   )
   console.log('        --git            add .gitignore')
   console.log(
-    '        --es6            generate ES6 code and module-type project (requires Node 14.x or higher)',
+    '        --es6            generate ES6 code and module-type project (requires Node 22.x or higher)',
+  )
+  console.log(
+    '    -o, --orm <orm>  add ORM <orm> support (prisma|sequelize)',
   )
   console.log('    -f, --force          force on non-empty directory')
   console.log('    --version            output the version number')

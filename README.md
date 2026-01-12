@@ -10,6 +10,7 @@
 
 - **🚀 ES6 支持**：代码更现代简洁。
 - **🔀 路由拆分**：独立文件，便于管理维护。
+- **🗄️ ORM 支持**：支持 Prisma 或 Sequelize ORM。
 - **📁 中间件模块化**：新增文件夹存放中间件。
 - **🔧 增加环境变量配置**：多环境管理更便捷。
 - **🔄 集成 nodemon**：开发时自动重启服务。
@@ -19,12 +20,15 @@
 
 ## 快速开始
 
+### 基础使用
+
 使用express最快的方式是利用可执行文件`express(1)`来生成一个应用，如下所示：
 
 创建应用：
 
 ```bash
-$ npx clwy-express-generator --view=ejs --es6 es6-demo && cd es6-demo
+$ npx clwy-express-generator --view=ejs --es6 es6-demo
+$ cd es6-demo
 ```
 
 安装依赖：
@@ -39,6 +43,51 @@ $ npm install
 $ npm start
 ```
 
+## 使用 ORM
+
+### 使用数据库
+
+安装好 Docker 并启动后：
+
+```bash
+$ docker-compose up -d
+```
+
+默认将启动 MySQL 数据库，PostgreSQL 和 Redis 配置已在 `docker-compose.yml` 中，请根据需求调整。
+
+### 使用 Prisma
+
+创建应用：
+
+```bash
+$ npx clwy-express-generator --view=ejs --orm=prisma --es6 es6-prisma-demo
+$ cd es6-prisma-demo
+$ npm i
+```
+
+初始化数据库客户端：
+
+```bash
+$ npx prisma generate
+```
+
+### 使用 Sequelize
+
+创建应用：
+
+```bash
+$ npx clwy-express-generator --view=ejs --orm=sequelize --es6 es6-sequelize-demo
+$ cd es6-sequelize-demo
+$ npm i
+```
+
+根据需求安装数据库引擎：
+
+```bash
+$ npm install --save mysql2 # MySQL
+$ npm install --save pg pg-hstore # Postgres
+```
+
 ## 命令行选项
 
 此生成器还可以通过以下命令行标志进行进一步配置。
@@ -46,6 +95,7 @@ $ npm start
         --version        输出版本号
     -v, --view <engine>  添加视图引擎 <engine> 支持 (dust|ejs|hbs|hjs|pug|twig|vash|api)（默认为 ejs）
         --no-view        使用静态html而不是视图引擎
+    -o, --orm <orm>      添加 ORM <orm> 支持 (prisma|sequelize)
     -c, --css <engine>   添加样式表引擎 <engine> 支持 (less|stylus|compass|sass)（默认为纯 css）
         --git            添加 .gitignore 文件
         --es6            生成 ES6 代码和模块类型项目（需要Node 22.x或更高版本）
@@ -54,31 +104,35 @@ $ npm start
 
 ------------
 
-# clwy-express-generator: [Express'](https://www.npmjs.com/package/express) application generator
+# clwy-express-generator: [Express](https://www.npmjs.com/package/express) Application Generator
 
-**This project is a fork of [express-generator](https://github.com/expressjs/generator), enhanced with new features.**
+**This project is forked from [express-generator](https://github.com/expressjs/generator) with additional features.**
 
-**The ES6 support was adapted and improved from [Dr Jeff Jackson](https://github.com/drjeffjackson)'s [Pull Request](https://github.com/expressjs/generator/pull/316).**
+**ES6 support is implemented based on the [Pull Request](https://github.com/expressjs/generator/pull/316) submitted by [Dr. Jeff Jackson](https://github.com/drjeffjackson), with further optimizations and adjustments.**
 
 ## Features
 
-- **🚀 ES6 Support**: Modern and cleaner code.
-- **🔀 Split Routes**: Separate files for easier management and maintenance.
-- **📁 Modular Middleware**: Dedicated folder for middleware.
-- **🔧 Environment Variables**: Easier multi-environment configuration.
-- **🔄 Nodemon Integration**: Auto-restart during development.
-- **🌐 CORS Integration**: Allows cross-origin requests.
-- **📄 Added basic README.md**: Describes the project as a simple Express app with static file serving and basic routing.
-- **📦 Built-in Configs**: Includes `.prettierrc` (code formatting) and `.gitignore` (file exclusion) by default.
+- **🚀 ES6 Support**: More modern and concise code.
+- **🔀 Route Splitting**: Independent files for easier management and maintenance.
+- **🗄️ ORM Support**: Supports Prisma or Sequelize ORM.
+- **📁 Modular Middleware**: New folder for storing middleware.
+- **🔧 Enhanced Environment Variable Configuration**: More convenient multi-environment management.
+- **🔄 Integrated Nodemon**: Automatic service restart during development.
+- **🌐 Integrated CORS**: Allows cross-origin requests.
+- **📄 Added README.md**: Contains project introduction and basic feature descriptions.
+- **📦 Built-in Configuration**: Includes `.prettierrc` (code formatting) and `.gitignore` (file ignore) by default.
 
 ## Quick Start
 
-The quickest way to get started with express is to utilize the executable `express(1)` to generate an application as shown below:
+### Basic Usage
 
-Create the app:
+The fastest way to create an Express application is by using the executable `express(1)` to generate an app, as shown below:
+
+Create the application:
 
 ```bash
-$ npx clwy-express-generator --view=ejs --es6 es6-demo && cd es6-demo
+$ npx clwy-express-generator --view=ejs --es6 es6-demo
+$ cd es6-demo
 ```
 
 Install dependencies:
@@ -93,18 +147,64 @@ Start your Express.js app at `http://localhost:3000/`:
 $ npm start
 ```
 
+## Using ORM
+
+### Using a Database
+
+After installing and starting Docker:
+
+```bash
+$ docker-compose up -d
+```
+
+This will start a MySQL database by default. PostgreSQL and Redis configurations are already in `docker-compose.yml`; adjust them according to your needs.
+
+### Using Prisma
+
+Create the application:
+
+```bash
+$ npx clwy-express-generator --view=ejs --orm=prisma --es6 es6-prisma-demo
+$ cd es6-prisma-demo
+$ npm i
+```
+
+Initialize the database client:
+
+```bash
+$ npx prisma generate
+```
+
+### Using Sequelize
+
+Create the application:
+
+```bash
+$ npx clwy-express-generator --view=ejs --orm=sequelize --es6 es6-sequelize-demo
+$ cd es6-sequelize-demo
+$ npm i
+```
+
+Install the database engine as needed:
+
+```bash
+$ npm install --save mysql2 # MySQL
+$ npm install --save pg pg-hstore # Postgres
+```
+
 ## Command Line Options
 
-This generator can also be further configured with the following command line flags.
+This generator can be further configured with the following command line flags.
 
-        --version        output the version number
-    -v, --view <engine>  add view <engine> support (dust|ejs|hbs|hjs|pug|twig|vash|api) (defaults to ejs)
-        --no-view        use static html instead of view engine
-    -c, --css <engine>   add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)
-        --git            add .gitignore
-        --es6            generate ES6 code and module-type project (requires Node 22.x or higher)
-    -f, --force          force on non-empty directory
-    -h, --help           output usage information
+        --version        Output the version number
+    -v, --view <engine>  Add view engine <engine> support (dust|ejs|hbs|hjs|pug|twig|vash|api) (defaults to ejs)
+        --no-view        Use static HTML instead of a view engine
+    -o, --orm <orm>      Add ORM <orm> support (prisma|sequelize)
+    -c, --css <engine>   Add stylesheet engine <engine> support (less|stylus|compass|sass) (defaults to plain css)
+        --git            Add .gitignore file
+        --es6            Generate ES6 code and module type project (requires Node 22.x or higher)
+    -f, --force          Force operation on non-empty directory
+    -h, --help           Output usage information
 
 ------------
 

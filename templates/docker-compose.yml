@@ -1,0 +1,26 @@
+services:
+  mysql:
+    image: mysql:latest
+    command:
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+#  postgresql:
+#    image: postgres:latest
+#    ports:
+#      - "5432:5432"
+#    environment:
+#      POSTGRES_PASSWORD: postgres
+#    volumes:
+#      - ./data/postgresql:/var/lib/postgresql/data
+#  redis:
+#    image: redis:latest
+#    ports:
+#      - "6379:6379"
+#    volumes:
+#      - ./data/redis:/data
