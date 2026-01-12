@@ -27,7 +27,17 @@ const args = parseArgs(process.argv.slice(2), {
     H: 'hogan',
     v: 'view'
   },
-  boolean: ['ejs', 'es6', 'force', 'git', 'hbs', 'help', 'hogan', 'pug', 'version'],
+  boolean: [
+    'ejs',
+    'es6',
+    'force',
+    'git',
+    'hbs',
+    'help',
+    'hogan',
+    'pug',
+    'version'
+  ],
   default: { css: true, view: true },
   string: ['css', 'view'],
   unknown: function (s) {
@@ -46,7 +56,7 @@ main(args, exit)
  * Prompt for confirmation on STDOUT/STDIN
  */
 
-function confirm (msg, callback) {
+function confirm(msg, callback) {
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -62,7 +72,7 @@ function confirm (msg, callback) {
  * Copy file from template directory.
  */
 
-function copyTemplate (from, to) {
+function copyTemplate(from, to) {
   write(to, fs.readFileSync(path.join(TEMPLATE_DIR, from), 'utf-8'))
 }
 
@@ -70,7 +80,7 @@ function copyTemplate (from, to) {
  * Copy multiple files from template directory.
  */
 
-function copyTemplateMulti (fromDir, toDir, nameGlob) {
+function copyTemplateMulti(fromDir, toDir, nameGlob) {
   fs.readdirSync(path.join(TEMPLATE_DIR, fromDir))
     .filter(minimatch.filter(nameGlob, { matchBase: true }))
     .forEach(function (name) {
@@ -87,7 +97,7 @@ function copyTemplateMulti (fromDir, toDir, nameGlob) {
  * @param {function} done
  */
 
-function createApplication (name, dir, options, done) {
+function createApplication(name, dir, options, done) {
   console.log()
 
   // Package
@@ -102,13 +112,13 @@ function createApplication (name, dir, options, done) {
     },
     dependencies: {
       cors: '^2.8.5',
-      debug: '~4.4.0',
-      dotenv: '^16.5.0',
-      express: '~5.1.0'
+      debug: '~4.4.3',
+      dotenv: '^17.2.3',
+      express: '~5.2.1'
     },
     devDependencies: {
-      nodemon: '^3.1.9',
-      prettier: '^3.5.3'
+      nodemon: '^3.1.11',
+      prettier: '^3.7.4'
     }
   }
 
@@ -127,7 +137,7 @@ function createApplication (name, dir, options, done) {
   // Request logger
   app.locals.modules.logger = 'morgan'
   app.locals.uses.push("logger('dev')")
-  pkg.dependencies.morgan = '~1.10.0'
+  pkg.dependencies.morgan = '~1.10.1'
 
   // Body parsers
   app.locals.uses.push('express.json()')
@@ -173,28 +183,35 @@ function createApplication (name, dir, options, done) {
   }
 
   // copy Prettier templates
-  copyTemplate(options.es6 ? 'mjs/prettierrc.json' : 'js/prettierrc.json', path.join(dir, '.prettierrc.json'))
+  copyTemplate(
+    options.es6 ? 'mjs/prettierrc.json' : 'js/prettierrc.json',
+    path.join(dir, '.prettierrc.json')
+  )
 
   // copy config templates
   mkdir(dir, 'config')
   copyTemplateMulti(
     options.es6 ? 'mjs/config' : 'js/config',
-    dir + '/config', '*.js'
+    dir + '/config',
+    '*.js'
   )
 
   // copy route templates
   mkdir(dir, 'routes')
   copyTemplateMulti(
     options.es6 ? 'mjs/routes' : 'js/routes',
-    dir + '/routes', '*.js')
+    dir + '/routes',
+    '*.js'
+  )
 
   if (options.view) {
     // Copy view templates
     mkdir(dir, 'views')
-    pkg.dependencies['http-errors'] = '~2.0.0'
+    pkg.dependencies['http-errors'] = '~2.0.1'
     copyTemplateMulti(
       options.es6 ? 'mjs/middlewares' : 'js/middlewares',
-      dir + '/middlewares', '*.js'
+      dir + '/middlewares',
+      '*.js'
     )
 
     switch (options.view) {
@@ -239,7 +256,9 @@ function createApplication (name, dir, options, done) {
       break
     case 'sass':
       app.locals.modules.sassMiddleware = 'node-sass-middleware'
-      app.locals.uses.push("sassMiddleware({\n  src: path.join(__dirname, 'public'),\n  dest: path.join(__dirname, 'public'),\n  indentedSyntax: true, // true = .sass and false = .scss\n  sourceMap: true\n})")
+      app.locals.uses.push(
+        "sassMiddleware({\n  src: path.join(__dirname, 'public'),\n  dest: path.join(__dirname, 'public'),\n  indentedSyntax: true, // true = .sass and false = .scss\n  sourceMap: true\n})"
+      )
       pkg.dependencies['node-sass-middleware'] = '~1.1.0'
       break
     case 'stylus':
@@ -338,8 +357,9 @@ function createApplication (name, dir, options, done) {
  * @param {String} pathName
  */
 
-function createAppName (pathName) {
-  return path.basename(pathName)
+function createAppName(pathName) {
+  return path
+    .basename(pathName)
     .replace(/[^A-Za-z0-9.-]+/g, '-')
     .replace(/^[-_.]+|-+$/g, '')
     .toLowerCase()
@@ -352,7 +372,7 @@ function createAppName (pathName) {
  * @param {Function} fn
  */
 
-function emptyDirectory (dir, fn) {
+function emptyDirectory(dir, fn) {
   fs.readdir(dir, function (err, files) {
     if (err && err.code !== 'ENOENT') throw err
     fn(!files || !files.length)
@@ -365,7 +385,7 @@ function emptyDirectory (dir, fn) {
  * @param {String} message
  */
 
-function error (message) {
+function error(message) {
   console.error()
   message.split('\n').forEach(function (line) {
     console.error('  error: %s', line)
@@ -377,12 +397,12 @@ function error (message) {
  * Graceful exit for async STDIO
  */
 
-function exit (code) {
+function exit(code) {
   // flush output for Node.js Windows pipe bug
   // https://github.com/joyent/node/issues/6247 is just one bug example
   // https://github.com/visionmedia/mocha/issues/333 has a good discussion
-  function done () {
-    if (!(draining--)) process.exit(code)
+  function done() {
+    if (!draining--) process.exit(code)
   }
 
   let draining = 0
@@ -403,20 +423,22 @@ function exit (code) {
  * Determine if launched from cmd.exe
  */
 
-function launchedFromCmd () {
-  return process.platform === 'win32' &&
-    process.env._ === undefined
+function launchedFromCmd() {
+  return process.platform === 'win32' && process.env._ === undefined
 }
 
 /**
  * Load template file.
  */
 
-function loadTemplate (name) {
-  const contents = fs.readFileSync(path.join(__dirname, '..', 'templates', (name + '.ejs')), 'utf-8')
+function loadTemplate(name) {
+  const contents = fs.readFileSync(
+    path.join(__dirname, '..', 'templates', name + '.ejs'),
+    'utf-8'
+  )
   const locals = Object.create(null)
 
-  function render () {
+  function render() {
     return ejs.render(contents, locals, {
       escape: util.inspect
     })
@@ -432,7 +454,7 @@ function loadTemplate (name) {
  * Main program.
  */
 
-function main (options, done) {
+function main(options, done) {
   // top-level argument direction
   if (options['!'].length > 0) {
     usage()
@@ -446,15 +468,20 @@ function main (options, done) {
     done(0)
   } else if (options.css === '') {
     usage()
-    error('option `-c, --css <engine>\' argument missing')
+    error("option `-c, --css <engine>' argument missing")
     done(1)
   } else if (options.view === '') {
     usage()
-    error('option `-v, --view <engine>\' argument missing')
+    error("option `-v, --view <engine>' argument missing")
     done(1)
-  } else if (options.es6 && process.versions.node.split('.')[0] < MIN_ES6_VERSION) {
+  } else if (
+    options.es6 &&
+    process.versions.node.split('.')[0] < MIN_ES6_VERSION
+  ) {
     usage()
-    error('option `--es6\' requires Node version ' + MIN_ES6_VERSION + '.x or higher')
+    error(
+      "option `--es6' requires Node version " + MIN_ES6_VERSION + '.x or higher'
+    )
     done(1)
   } else {
     console.log(options.view)
@@ -462,7 +489,8 @@ function main (options, done) {
     const destinationPath = options._[0] || '.'
 
     // App name
-    const appName = createAppName(path.resolve(destinationPath)) || 'hello-world'
+    const appName =
+      createAppName(path.resolve(destinationPath)) || 'hello-world'
 
     // View engine
     if (options.view === true) {
@@ -489,8 +517,10 @@ function main (options, done) {
 
     // Default view engine
     if (options.view === true) {
-      warning('the default view engine will not be ejs in future releases\n' +
-        "use `--view=ejs' or `--help' for additional options")
+      warning(
+        'the default view engine will not be ejs in future releases\n' +
+          "use `--view=ejs' or `--help' for additional options"
+      )
       options.view = 'ejs'
     }
 
@@ -520,7 +550,7 @@ function main (options, done) {
  * @param {string} dir
  */
 
-function mkdir (base, dir) {
+function mkdir(base, dir) {
   const loc = path.join(base, dir)
 
   console.log('   \x1b[36mcreate\x1b[0m : ' + loc + path.sep)
@@ -531,7 +561,7 @@ function mkdir (base, dir) {
  * Display the usage.
  */
 
-function usage () {
+function usage() {
   console.log('')
   console.log('  Usage: express [options] [dir]')
   console.log('')
@@ -541,11 +571,17 @@ function usage () {
   console.log('        --pug            add pug engine support')
   console.log('        --hbs            add handlebars engine support')
   console.log('    -H, --hogan          add hogan.js engine support')
-  console.log('    -v, --view <engine>  add view <engine> support (dust|ejs|hbs|hjs|pug|twig|vash) (defaults to ejs)')
+  console.log(
+    '    -v, --view <engine>  add view <engine> support (dust|ejs|hbs|hjs|pug|twig|vash) (defaults to ejs)'
+  )
   console.log('        --no-view        use static html instead of view engine')
-  console.log('    -c, --css <engine>   add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)')
+  console.log(
+    '    -c, --css <engine>   add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)'
+  )
   console.log('        --git            add .gitignore')
-  console.log('        --es6            generate ES6 code and module-type project (requires Node 14.x or higher)')
+  console.log(
+    '        --es6            generate ES6 code and module-type project (requires Node 14.x or higher)'
+  )
   console.log('    -f, --force          force on non-empty directory')
   console.log('    --version            output the version number')
   console.log('    -h, --help           output usage information')
@@ -555,7 +591,7 @@ function usage () {
  * Display the version.
  */
 
-function version () {
+function version() {
   console.log(VERSION)
 }
 
@@ -565,7 +601,7 @@ function version () {
  * @param {String} message
  */
 
-function warning (message) {
+function warning(message) {
   console.error()
   message.split('\n').forEach(function (line) {
     console.error('  warning: %s', line)
@@ -580,7 +616,7 @@ function warning (message) {
  * @param {String} str
  */
 
-function write (file, str, mode) {
+function write(file, str, mode) {
   fs.writeFileSync(file, str, { mode: mode || MODE_0666 })
   console.log('   \x1b[36mcreate\x1b[0m : ' + file)
 }
