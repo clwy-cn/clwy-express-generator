@@ -71,7 +71,9 @@ $ npm install --save mysql2 # MySQL
 $ npm install --save pg pg-hstore # Postgres
 ```
 
-项目已默认集成了[clwy-sequelize-cli](https://github.com/clwy-cn/clwy-sequelize-cli)，使用以下命令会生成**ES6**风格的模型、迁移和种子文件。
+### clwy-sequelize-cli
+
+项目已默认集成了[clwy-sequelize-cli](https://github.com/clwy-cn/clwy-sequelize-cli)，使用以下命令会生成 **ES6** 风格的模型、迁移和种子文件。
 
 **生成模型和迁移文件：**
 
