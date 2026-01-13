@@ -212,7 +212,6 @@ $ npx sequelize seed:generate --name article
 
 ```bash
 $ npx clwy-express-generator --view=ejs --orm=prisma --es6 es6-prisma-demo
-# or: npx clwy-express-generator -v=ejs -o=prisma --es6 es6-prisma-demo
 
 $ cd es6-prisma-demo
 $ npm i
