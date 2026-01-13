@@ -4,13 +4,11 @@
 
 **此项目基于 [express-generator](https://github.com/expressjs/generator) 分叉而来，并新增了一些功能特性。**
 
-**其中，ES6 支持的实现参考了 [Dr. Jeff Jackson](https://github.com/drjeffjackson) 提交的 [Pull Request](https://github.com/expressjs/generator/pull/316)，并在其基础上进行了进一步优化和调整。**
-
 ## 功能特性
 
 - **🚀 ES6 支持**：代码更现代简洁。
 - **🔀 路由拆分**：独立文件，便于管理维护。
-- **🗄️ ORM 支持**：支持 Prisma 或 Sequelize ORM。
+- **🗄️ ORM 支持**：支持 Sequelize 或 Prisma ORM。
 - **📁 中间件模块化**：新增文件夹存放中间件。
 - **🔧 增加环境变量配置**：多环境管理更便捷。
 - **🔄 集成 nodemon**：开发时自动重启服务。
@@ -28,6 +26,7 @@
 
 ```bash
 $ npx clwy-express-generator --view=ejs --es6 es6-demo
+# 或：npx clwy-express-generator -v=ejs --es6 es6-demo
 $ cd es6-demo
 ```
 
@@ -53,23 +52,7 @@ $ npm start
 $ docker-compose up -d
 ```
 
-默认将启动 MySQL 数据库，PostgreSQL 和 Redis 配置已在 `docker-compose.yml` 中，请根据需求调整。
-
-### 使用 Prisma
-
-创建应用：
-
-```bash
-$ npx clwy-express-generator --view=ejs --orm=prisma --es6 es6-prisma-demo
-$ cd es6-prisma-demo
-$ npm i
-```
-
-初始化数据库客户端：
-
-```bash
-$ npx prisma generate
-```
+默认将启动 MySQL 数据库，PostgreSQL 和 Redis 配置已在 `docker-compose.yml` 中，请根据需求取消注释。
 
 ### 使用 Sequelize
 
@@ -77,6 +60,8 @@ $ npx prisma generate
 
 ```bash
 $ npx clwy-express-generator --view=ejs --orm=sequelize --es6 es6-sequelize-demo
+# 或：npx clwy-express-generator -v=ejs -o=sequelize --es6 es6-sequelize-demo
+
 $ cd es6-sequelize-demo
 $ npm i
 ```
@@ -88,6 +73,24 @@ $ npm install --save mysql2 # MySQL
 $ npm install --save pg pg-hstore # Postgres
 ```
 
+### 使用 Prisma
+
+创建应用：
+
+```bash
+$ npx clwy-express-generator --view=ejs --orm=prisma --es6 es6-prisma-demo
+# 或：npx clwy-express-generator -v=ejs -o=prisma --es6 es6-prisma-demo
+
+$ cd es6-prisma-demo
+$ npm i
+```
+
+初始化数据库客户端：
+
+```bash
+$ npx prisma generate
+```
+
 ## 命令行选项
 
 此生成器还可以通过以下命令行标志进行进一步配置。
@@ -95,7 +98,7 @@ $ npm install --save pg pg-hstore # Postgres
         --version        输出版本号
     -v, --view <engine>  添加视图引擎 <engine> 支持 (dust|ejs|hbs|hjs|pug|twig|vash|api)（默认为 ejs）
         --no-view        使用静态html而不是视图引擎
-    -o, --orm <orm>      添加 ORM <orm> 支持 (prisma|sequelize)
+    -o, --orm <orm>      添加 ORM <orm> 支持 (sequelize|prisma)
     -c, --css <engine>   添加样式表引擎 <engine> 支持 (less|stylus|compass|sass)（默认为纯 css）
         --git            添加 .gitignore 文件
         --es6            生成 ES6 代码和模块类型项目（需要Node 22.x或更高版本）
@@ -107,8 +110,6 @@ $ npm install --save pg pg-hstore # Postgres
 # clwy-express-generator: [Express](https://www.npmjs.com/package/express) Application Generator
 
 **This project is forked from [express-generator](https://github.com/expressjs/generator) with additional features.**
-
-**ES6 support is implemented based on the [Pull Request](https://github.com/expressjs/generator/pull/316) submitted by [Dr. Jeff Jackson](https://github.com/drjeffjackson), with further optimizations and adjustments.**
 
 ## Features
 
@@ -132,6 +133,7 @@ Create the application:
 
 ```bash
 $ npx clwy-express-generator --view=ejs --es6 es6-demo
+# or: npx clwy-express-generator -v=ejs --es6 es6-demo
 $ cd es6-demo
 ```
 
@@ -157,23 +159,8 @@ After installing and starting Docker:
 $ docker-compose up -d
 ```
 
-This will start a MySQL database by default. PostgreSQL and Redis configurations are already in `docker-compose.yml`; adjust them according to your needs.
-
-### Using Prisma
-
-Create the application:
-
-```bash
-$ npx clwy-express-generator --view=ejs --orm=prisma --es6 es6-prisma-demo
-$ cd es6-prisma-demo
-$ npm i
-```
-
-Initialize the database client:
-
-```bash
-$ npx prisma generate
-```
+By default, the MySQL database will be started. PostgreSQL and Redis configurations are already included in
+docker-compose.yml; please uncomment them as needed.
 
 ### Using Sequelize
 
@@ -181,6 +168,8 @@ Create the application:
 
 ```bash
 $ npx clwy-express-generator --view=ejs --orm=sequelize --es6 es6-sequelize-demo
+# or: npx clwy-express-generator -v=ejs -o=sequelize --es6 es6-sequelize-demo
+
 $ cd es6-sequelize-demo
 $ npm i
 ```
@@ -192,6 +181,24 @@ $ npm install --save mysql2 # MySQL
 $ npm install --save pg pg-hstore # Postgres
 ```
 
+### Using Prisma
+
+Create the application:
+
+```bash
+$ npx clwy-express-generator --view=ejs --orm=prisma --es6 es6-prisma-demo
+# or: npx clwy-express-generator -v=ejs -o=prisma --es6 es6-prisma-demo
+
+$ cd es6-prisma-demo
+$ npm i
+```
+
+Initialize the database client:
+
+```bash
+$ npx prisma generate
+```
+
 ## Command Line Options
 
 This generator can be further configured with the following command line flags.
@@ -199,7 +206,7 @@ This generator can be further configured with the following command line flags.
         --version        Output the version number
     -v, --view <engine>  Add view engine <engine> support (dust|ejs|hbs|hjs|pug|twig|vash|api) (defaults to ejs)
         --no-view        Use static HTML instead of a view engine
-    -o, --orm <orm>      Add ORM <orm> support (prisma|sequelize)
+    -o, --orm <orm>      Add ORM <orm> support (sequelize|prisma)
     -c, --css <engine>   Add stylesheet engine <engine> support (less|stylus|compass|sass) (defaults to plain css)
         --git            Add .gitignore file
         --es6            Generate ES6 code and module type project (requires Node 22.x or higher)
