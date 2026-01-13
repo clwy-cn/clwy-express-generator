@@ -56,36 +56,46 @@ $ docker-compose up -d
 
 ### 使用 Sequelize
 
-创建应用：
+**创建应用：**
 
 ```bash
 $ npx clwy-express-generator --view=ejs --orm=sequelize --es6 es6-sequelize-demo
-# 或：npx clwy-express-generator -v=ejs -o=sequelize --es6 es6-sequelize-demo
-
 $ cd es6-sequelize-demo
 $ npm i
 ```
 
-根据需求安装数据库引擎：
+**根据需求安装数据库引擎：**
 
 ```bash
 $ npm install --save mysql2 # MySQL
 $ npm install --save pg pg-hstore # Postgres
 ```
 
+项目已默认集成了[clwy-sequelize-cli](https://github.com/clwy-cn/clwy-sequelize-cli)，使用以下命令会生成**ES6**风格的模型、迁移和种子文件。
+
+**生成模型和迁移文件：**
+
+```bash
+$ npx sequelize model:generate --name Article --attributes title:string,content:text
+```
+
+**生成种子文件：**
+
+```bash
+$ npx sequelize seed:generate --name article
+```
+
 ### 使用 Prisma
 
-创建应用：
+**创建应用：**
 
 ```bash
 $ npx clwy-express-generator --view=ejs --orm=prisma --es6 es6-prisma-demo
-# 或：npx clwy-express-generator -v=ejs -o=prisma --es6 es6-prisma-demo
-
 $ cd es6-prisma-demo
 $ npm i
 ```
 
-初始化数据库客户端：
+**初始化数据库客户端：**
 
 ```bash
 $ npx prisma generate
@@ -133,7 +143,6 @@ Create the application:
 
 ```bash
 $ npx clwy-express-generator --view=ejs --es6 es6-demo
-# or: npx clwy-express-generator -v=ejs --es6 es6-demo
 $ cd es6-demo
 ```
 
@@ -164,26 +173,38 @@ docker-compose.yml; please uncomment them as needed.
 
 ### Using Sequelize
 
-Create the application:
+**Create the application:**
 
 ```bash
 $ npx clwy-express-generator --view=ejs --orm=sequelize --es6 es6-sequelize-demo
-# or: npx clwy-express-generator -v=ejs -o=sequelize --es6 es6-sequelize-demo
-
 $ cd es6-sequelize-demo
 $ npm i
 ```
 
-Install the database engine as needed:
+**Install the database engine as needed:**
 
 ```bash
 $ npm install --save mysql2 # MySQL
 $ npm install --save pg pg-hstore # Postgres
 ```
 
+The project has [clwy-sequelize-cli](https://github.com/clwy-cn/clwy-sequelize-cli) integrated by default. Using the following commands will generate **ES6-style** models, migrations, and seed files.
+
+**Generate model and migration files:**
+
+```bash
+$ npx sequelize model:generate --name Article --attributes title:string,content:text
+```
+
+**Generate seed file:**
+
+```bash
+$ npx sequelize seed:generate --name article
+```
+
 ### Using Prisma
 
-Create the application:
+**Create the application:**
 
 ```bash
 $ npx clwy-express-generator --view=ejs --orm=prisma --es6 es6-prisma-demo
@@ -193,7 +214,7 @@ $ cd es6-prisma-demo
 $ npm i
 ```
 
-Initialize the database client:
+**Initialize the database client:**
 
 ```bash
 $ npx prisma generate

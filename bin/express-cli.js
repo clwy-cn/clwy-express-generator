@@ -311,6 +311,11 @@ function createApplication(name, dir, options, done) {
       case 'sequelize':
         // copy Sequelize templates
         pkg.dependencies.sequelize = '^6.37.7'
+        if (options.es6) {
+          pkg.devDependencies['clwy-sequelize-cli'] = '^0.0.1';
+        } else {
+          pkg.devDependencies['sequelize-cli'] = '^6.6.5';
+        }
 
         mkdir(dir, 'migrations')
         mkdir(dir, 'seeders')
