@@ -315,7 +315,7 @@ function createApplication(name, dir, options, done) {
         mkdir(dir, 'migrations')
         mkdir(dir, 'seeders')
         mkdir(dir, 'models')
-        copyTemplateMulti('sequelize/models', dir + '/models', 'index.js')
+        copyTemplateMulti(options.es6 ? 'sequelize/models/mjs' : 'sequelize/models/js', dir + '/models', 'index.js')
         copyTemplateMulti('sequelize/config', dir + '/config', 'config.json')
         break
     }
